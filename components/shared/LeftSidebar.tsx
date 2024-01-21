@@ -24,8 +24,16 @@ const LeftSidebar = () => {
               href={link.route}
               className={`leftsidebar_link ${isActive && "bg-primary-500"}`}
             >
-              <div className="text-light-1">{link.imgURL}</div>
-              <p className="text-light-1 max-lg:hidden">{link.label}</p>
+              <div className={`${isActive ? "text-dark-1" : "text-light-1"}`}>
+                {link.imgURL}
+              </div>
+              <p
+                className={`${
+                  isActive ? "text-dark-1" : "text-light-1"
+                } max-lg:hidden`}
+              >
+                {link.label}
+              </p>
             </Link>
           );
         })}
