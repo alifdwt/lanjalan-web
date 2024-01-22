@@ -11,6 +11,7 @@ interface ThreadCardProps {
         id: string;
         name: string;
         image: string;
+        username: string
     };
     community: {
         id: string;
@@ -28,11 +29,11 @@ interface ThreadCardProps {
 
 const ThreadCard: React.FC<ThreadCardProps> = ({ id, currentUserId, parentId, content, author, community, createdAt, comments, isComment }) => {
   return (
-    <article className="flex w-full flex-col rounded-xl bg-dark-2 p-7">
+    <article className={`flex w-full flex-col rounded-xl ${isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"}`}>
         <div className="flex items-start justify-between">
             <div className="flex w-full flex-1 flex-row gap-4">
                 <div className="flex flex-col items-center">
-                    <Link href={`/profile/${author.id}`} className="relative h-11 w-11">
+                    <Link href={`/${author.username}`} className="relative h-11 w-11">
                         <Image
                             src={author.image}
                             alt="profile image"
@@ -44,8 +45,9 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ id, currentUserId, parentId, co
                 </div>
 
                 <div className="flex w-full flex-col">
-                    <Link href={`/profile/${author.id}`} className="w-fil">
+                    <Link href={`/${author.username}`} className="w-full flex gap-2">
                         <h4 className="cursor-pointer text-base-semibold text-light-1">{author.name}</h4>
+                        <h5 className="cursor-pointer text-small-regular text-gray-1">{author.username}</h5>
                     </Link>
 
                     <p className="mt-2 text-small-regular text-light-2">{content}</p>

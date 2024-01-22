@@ -11,6 +11,8 @@ import {
   Users2,
 } from "lucide-react";
 
+
+
 export const sidebarLinks: {
   imgURL: JSX.Element;
   route: string;
@@ -43,7 +45,7 @@ export const sidebarLinks: {
   },
   {
     imgURL: <User size={24} />,
-    route: "/profile",
+    route: "/pinangranti",
     label: "Profil",
   },
 ];

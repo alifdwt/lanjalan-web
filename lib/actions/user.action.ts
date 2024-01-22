@@ -51,3 +51,13 @@ export async function fetchUser(userId: string) {
     throw new Error(`Failed to fetch user: ${error.message}`);
   }
 }
+
+export async function fetchUserByUsername(username: string) {
+  connectToDB()
+  
+  try {
+    return await User.findOne({ username })
+  } catch (error) {
+    throw new Error(`Failed to fetch user: ${error}`)
+  }
+}
