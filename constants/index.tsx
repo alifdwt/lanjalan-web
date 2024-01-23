@@ -4,14 +4,14 @@ import {
   Flame,
   Heart,
   Home,
+  MessageCircleMore,
   Search,
   SquarePen,
-  Tag,
+  Tags,
   User,
+  Users,
   Users2,
 } from "lucide-react";
-
-
 
 export const sidebarLinks: {
   imgURL: JSX.Element;
@@ -45,15 +45,15 @@ export const sidebarLinks: {
   },
   {
     imgURL: <User size={24} />,
-    route: "/pinangranti",
+    route: "/profile",
     label: "Profil",
   },
 ];
 
 export const profileTabs = [
-  { value: "threads", label: "Threads", icon: <AlignJustify size={24} /> },
-  { value: "replies", label: "Replies", icon: <Flame size={24} /> },
-  { value: "tagged", label: "Tagged", icon: <Tag size={24} /> },
+  { value: "threads", label: "Threads", icon: <MessageCircleMore size={24} /> },
+  { value: "replies", label: "Replies", icon: <Users size={24} /> },
+  { value: "tagged", label: "Tagged", icon: <Tags size={24} /> },
 ];
 
 export const communityTabs = [

@@ -3,6 +3,7 @@
 import { connectToDB } from "@/lib/mongoose";
 import User from "../models/user.model";
 import { revalidatePath } from "next/cache";
+import Thread from "../models/thread.model";
 
 interface Params {
   userId: string;
@@ -53,11 +54,46 @@ export async function fetchUser(userId: string) {
 }
 
 export async function fetchUserByUsername(username: string) {
-  connectToDB()
-  
+  connectToDB();
+
   try {
-    return await User.findOne({ username })
+    return await User.findOne({ username });
   } catch (error) {
-    throw new Error(`Failed to fetch user: ${error}`)
+    throw new Error(`Failed to fetch user: ${error}`);
+  }
+}
+
+export async function fetchUsernameById(userId: string) {
+  try {
+    connectToDB();
+
+    const user = await User.findOne({ id: userId });
+    return user?.username;
+  } catch (error) {
+    throw new Error(`Failed to fetch username: ${error}`);
+  }
+}
+
+export async function fetchUserThreads(userId: string) {
+  try {
+    connectToDB();
+
+    const threads = await User.findOne({ id: userId }).populate({
+      path: "threads",
+      model: Thread,
+      populate: {
+        path: "children",
+        model: Thread,
+        populate: {
+          path: "author",
+          model: User,
+          select: "name image id",
+        },
+      },
+    });
+
+    return threads;
+  } catch (error: any) {
+    throw new Error(`Failed to fetch user: ${error.message}`);
   }
 }

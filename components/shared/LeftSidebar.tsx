@@ -1,7 +1,8 @@
 "use client";
 
 import { sidebarLinks } from "@/constants";
-import { SignOutButton, SignedIn } from "@clerk/nextjs";
+// import { fetchUsernameById } from "@/lib/actions/user.action";
+import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -9,6 +10,8 @@ import { usePathname, useRouter } from "next/navigation";
 const LeftSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const { userId } = useAuth();
+  // const username = await fetchUsernameById(userId);
 
   return (
     <section className="custom-scrollbar leftsidebar">
@@ -17,6 +20,8 @@ const LeftSidebar = () => {
           const isActive =
             (pathname.includes(link.route) && link.route.length > 1) ||
             pathname === link.route;
+
+          // if (link.route === "/profile") link.route = `/${username}`;
 
           return (
             <Link
